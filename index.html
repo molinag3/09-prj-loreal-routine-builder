@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>L'Oréal | Smart Routine &amp; Product Advisor</title>
+    <link rel="icon" type="image/png" href="img/loreal-logo.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -19,16 +20,24 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <div class="lang-toggle-bar">
+          <button id="dirToggleBtn" class="dir-toggle-btn" type="button" aria-pressed="false" title="Switch text direction">
+            <i class="fa-solid fa-globe"></i>
+            <span id="dirToggleLabel">RTL (العربية / עברית)</span>
+          </button>
+        </div>
         <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
         <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
+        <p class="site-tagline">Because You're Worth It</p>
       </header>
 
       <!-- Category Filter -->
-      <div class="search-section">
+      <section class="search-section" aria-label="Product Category Filter">
+        <label for="categoryFilter" class="visually-hidden">Choose Category</label>
         <select id="categoryFilter">
           <option value="" disabled selected>Choose a Category</option>
           <option value="cleanser">Cleansers</option>
-          <option value="moisturizer">Moisturizers & Treatments</option>
+          <option value="moisturizer">Moisturizers &amp; Treatments</option>
           <option value="haircare">Haircare</option>
           <option value="makeup">Makeup</option>
           <option value="hair color">Hair Color</option>
@@ -37,24 +46,39 @@
           <option value="suncare">Suncare</option>
           <option value="fragrance">Fragrance</option>
         </select>
-      </div>
+      </section>
 
       <!-- Products Grid -->
-      <div id="productsContainer" class="products-grid"></div>
+      <section aria-label="Available Products">
+        <div id="productsContainer" class="products-grid"></div>
+      </section>
 
       <!-- Selected Products -->
-      <div class="selected-products">
-        <h2>Selected Products</h2>
-        <div id="selectedProductsList"></div>
-        <button id="generateRoutine" class="generate-btn">
+      <section class="selected-products" aria-label="Selected Routine Products">
+        <div class="selected-header">
+          <h2>Selected Products (<span id="selectedCount">0</span>)</h2>
+          <button id="clearSelectionBtn" class="clear-selection-btn" type="button" style="display:none;">Clear All</button>
+        </div>
+        <div id="selectedProductsList">
+          <p class="empty-selection-msg">Click on any product above to add it to your custom routine.</p>
+        </div>
+        <button id="generateRoutine" class="generate-btn" type="button">
           <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
         </button>
-      </div>
+      </section>
 
       <!------- Chat Area ------->
-      <section class="chatbox">
+      <section class="chatbox" aria-label="L'Oréal Routine Advisor Chat">
         <h2>Let's Build Your Routine</h2>
-        <div id="chatWindow" class="chat-window"></div>
+        <div id="chatWindow" class="chat-window" role="log" aria-live="polite">
+          <div class="chat-msg bot">
+            <i class="fa-solid fa-sparkles chat-avatar"></i>
+            <div class="chat-content">
+              <strong>L'Oréal Beauty Advisor</strong>
+              <p>Bonjour! Welcome to your personal L'Oréal Routine &amp; Product Advisor. Select products from above or ask me about skincare steps, hair types, anti-aging solutions, and personalized beauty regimens.</p>
+            </div>
+          </div>
+        </div>
 
         <form id="chatForm" class="chat-form">
           <label for="userInput" class="visually-hidden">Message</label>
@@ -62,11 +86,11 @@
             id="userInput"
             name="userInput"
             type="text"
-            placeholder="Ask me about products or routines…"
+            placeholder="Ask me about products, skin types, or routines…"
             autocomplete="off"
             required
           />
-          <button type="submit" id="sendBtn">
+          <button type="submit" id="sendBtn" title="Send Message">
             <i class="fa-solid fa-paper-plane"></i>
             <span class="visually-hidden">Send</span>
           </button>
@@ -76,8 +100,7 @@
       <!------- Footer Links ------->
       <footer class="site-footer">
         <p>&copy; 2025 L'Oréal. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
+        <nav aria-label="Footer navigation">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
           <a href="#">Contact</a>
